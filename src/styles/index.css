@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+  --color-olive: #596348;
+  --color-olive-light: #768461;
+  --color-olive-deep: #30382A;
+  --color-olive-darker: #1E2419;
+
+  --color-beige: #E8DDCA;
+  --color-beige-light: #F3ECE0;
+  --color-beige-dark: #D8C7AF;
+
+  --color-cream: #F7F3EA;
+  --color-cream-soft: #FAF8F4;
+
+  --color-gold: #B59A63;
+  --color-gold-light: #D4B87C;
+  --color-gold-dark: #8C723D;
+
+  --color-dark: #20231D;
+  --color-dark-deeper: #141712;
+
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-cinzel: 'Cinzel', serif;
+  --font-sans: 'Montserrat', sans-serif;
+  --font-script: 'Alex Brush', cursive;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #20231D;
+  color: #F7F3EA;
+}
+
+body {
+  overflow-x: hidden;
+  background: #20231D;
+}
+
+/* Custom luxury scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #1E2419;
+}
+::-webkit-scrollbar-thumb {
+  background: #B59A63;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D4B87C;
+}
+
+/* Luxury visual helpers */
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+}
+
+.font-serif {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-script {
+  font-family: 'Alex Brush', cursive;
+}
+
+/* Gold Gradient Text */
+.gold-text-gradient {
+  background: linear-gradient(135deg, #F3ECE0 0%, #D4B87C 30%, #B59A63 70%, #8C723D 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Gold Foil Border Gradient */
+.gold-border-gradient {
+  border-image: linear-gradient(135deg, #B59A63 0%, #E8DDCA 50%, #8C723D 100%) 1;
+}
+
+/* Luxury Soft Shadow */
+.luxury-shadow {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 30px rgba(181, 154, 99, 0.15);
+}
+
+/* Subtle Film Grain Shader Overlay */
+.grain-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+}
+
+/* Radial Vignette */
+.vignette-overlay {
+  background: radial-gradient(circle at center, transparent 40%, rgba(32, 35, 29, 0.75) 100%);
+}
+
+/* Glassmorphism Card */
+.glass-panel {
+  background: rgba(48, 56, 42, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(181, 154, 99, 0.25);
+}
+
+.glass-panel-light {
+  background: rgba(232, 221, 202, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(181, 154, 99, 0.2);
+}
