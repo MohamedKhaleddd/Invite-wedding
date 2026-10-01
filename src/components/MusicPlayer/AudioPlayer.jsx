@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Volume2, VolumeX, Music } from 'lucide-react';
+import { translations } from '../../config/translations';
 
-export default function AudioPlayer({ isPlaying, onTogglePlay }) {
+export default function AudioPlayer({ isPlaying, onTogglePlay, language }) {
   const [muted, setMuted] = useState(false);
   const audioCtxRef = useRef(null);
   const isAudioStartedRef = useRef(false);
   const intervalRef = useRef(null);
+  const copy = translations[language];
 
   // Romantic ambient piano synth chords synthesizer using Web Audio API
   useEffect(() => {
@@ -96,7 +98,7 @@ export default function AudioPlayer({ isPlaying, onTogglePlay }) {
     <div className="fixed bottom-6 right-6 z-50">
       <button
         onClick={toggleMute}
-        aria-label={muted ? "Unmute background music" : "Mute background music"}
+        aria-label={muted ? copy.unmute : copy.mute}
         className="group relative flex items-center gap-2 px-4 py-2.5 rounded-full bg-dark-deeper/80 backdrop-blur-md border border-gold/30 text-beige hover:border-gold hover:text-gold transition-all duration-300 shadow-lg"
       >
         <span className="relative flex h-3 w-3">
@@ -108,7 +110,7 @@ export default function AudioPlayer({ isPlaying, onTogglePlay }) {
 
         {muted ? <VolumeX className="w-4 h-4 text-gray-400" /> : <Volume2 className="w-4 h-4 text-gold animate-pulse" />}
         <span className="text-xs font-cinzel tracking-widest hidden sm:inline-block">
-          {muted ? "SOUND OFF" : "ROMANTIC THEME"}
+          {muted ? copy.soundOff : copy.soundOn}
         </span>
       </button>
     </div>

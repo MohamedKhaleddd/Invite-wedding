@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { weddingData } from '../../config/weddingData';
+import { translations } from '../../config/translations';
 
-export default function Navbar({ activeSection }) {
+export default function Navbar({ activeSection, language, onToggleLanguage }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -18,12 +19,11 @@ export default function Navbar({ activeSection }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { label: 'Home', href: '#home' },
-    { label: 'Our Story', href: '#story' },
-    { label: 'Details', href: '#details' },
-    { label: 'Timeline', href: '#timeline' },
-  ];
+  const copy = translations[language];
+  const navLinks = copy.nav.map((label, index) => ({
+    label,
+    href: ['#home', '#story', '#details', '#timeline'][index]
+  }));
 
   const handleNavClick = (e, href) => {
     e.preventDefault();
@@ -49,10 +49,18 @@ export default function Navbar({ activeSection }) {
           <div className="w-9 h-9 rounded-full border border-gold/60 flex items-center justify-center bg-dark/60 text-gold font-cinzel text-sm font-semibold group-hover:border-gold transition-colors">
             T&amp;J
           </div>
-          <span className="font-cinzel text-sm tracking-[0.2em] text-cream font-semibold group-hover:text-gold transition-colors hidden sm:inline-block">
+          <span dir="ltr" className="font-cinzel text-sm tracking-[0.2em] text-cream font-semibold group-hover:text-gold transition-colors hidden sm:inline-block">
             THARWAT &amp; JANA
           </span>
         </a>
+
+        <button
+          onClick={onToggleLanguage}
+          aria-label={copy.languageLabel}
+          className="rounded-full border border-gold/40 px-3 py-2 text-sm text-cream transition-colors hover:border-gold hover:text-gold"
+        >
+          {copy.languageName}
+        </button>
 
         {/* Desktop Nav Links */}
         <nav className="hidden md:flex items-center gap-8">
@@ -73,7 +81,7 @@ export default function Navbar({ activeSection }) {
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
           className="md:hidden text-beige hover:text-gold p-2 rounded-lg border border-gold/20 bg-dark/50"
-          aria-label="Toggle Navigation Menu"
+          aria-label={copy.menuLabel}
         >
           {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -94,7 +102,7 @@ export default function Navbar({ activeSection }) {
           ))}
           <div className="w-16 h-[1px] bg-gold/40 my-2" />
           <p className="font-serif text-xs italic text-gold/80">
-            November 13, 2026 — La Rose
+            {copy.mobileDate}
           </p>
         </div>
       )}

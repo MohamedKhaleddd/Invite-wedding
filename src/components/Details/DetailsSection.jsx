@@ -4,12 +4,14 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import GoldBorder from '../UI/GoldBorder';
 import FloralDivider from '../UI/FloralDivider';
 import { weddingData } from '../../config/weddingData';
+import { translations } from '../../config/translations';
 import { Calendar, MapPin, Navigation, Compass, ExternalLink, Shirt } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function DetailsSection() {
+export default function DetailsSection({ language }) {
   const sectionRef = useRef(null);
+  const copy = translations[language];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -53,7 +55,7 @@ export default function DetailsSection() {
   }, []);
 
   return (
-    <section id="details" ref={sectionRef} className="relative py-24 px-4 bg-transparent overflow-hidden">
+    <section dir={language === 'ar' ? 'rtl' : 'ltr'} id="details" ref={sectionRef} className={`relative py-24 px-4 bg-transparent overflow-hidden ${language === 'ar' ? 'font-arabic' : ''}`}>
       
       {/* Decorative leaf background element */}
       <div className="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(circle_at_bottom_right,rgba(181,154,99,0.3),transparent_60%)]" />
@@ -64,14 +66,14 @@ export default function DetailsSection() {
         <div className="text-center max-w-2xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 text-gold font-cinzel text-xs tracking-[0.3em] uppercase mb-2">
             <Compass className="w-4 h-4" />
-            <span>The Celebration</span>
+            <span>{copy.celebration}</span>
           </div>
           <h2 className="font-cinzel text-3xl sm:text-5xl font-bold text-cream tracking-wider">
-            WEDDING DETAILS
+            {copy.weddingDetails}
           </h2>
           <FloralDivider />
           <p className="font-serif text-lg text-beige italic">
-            We look forward to celebrating this extraordinary evening with you.
+            {copy.detailsIntro}
           </p>
         </div>
 
@@ -85,13 +87,13 @@ export default function DetailsSection() {
                 <Calendar className="w-7 h-7" />
               </div>
               <h3 className="font-cinzel text-lg font-bold text-gold uppercase tracking-wider mb-2">
-                WHEN
+                {copy.when}
               </h3>
               <p className="font-serif text-2xl text-cream font-semibold">
-                Friday, Nov 13, 2026
+                {copy.shortDate}
               </p>
               <p className="text-sm text-beige/80 mt-2 font-light">
-                Doors Open at 8:00 PM
+                {copy.doorsOpen}
               </p>
             </GoldBorder>
           </div>
@@ -103,7 +105,7 @@ export default function DetailsSection() {
                 <MapPin className="w-7 h-7" />
               </div>
               <h3 className="font-cinzel text-lg font-bold text-gold uppercase tracking-wider mb-2">
-                WHERE
+                {copy.where}
               </h3>
               <p className="font-serif text-2xl text-cream font-semibold">
                 {weddingData.event.venue}
@@ -112,7 +114,7 @@ export default function DetailsSection() {
                 {weddingData.event.hotel}
               </p>
               <p className="text-xs text-beige/60 mt-1">
-                El-Mosheer Tantawy Axis, Cairo
+                {copy.address}
               </p>
             </GoldBorder>
           </div>
@@ -124,12 +126,12 @@ export default function DetailsSection() {
                 <Shirt className="w-7 h-7" />
               </div>
               <h3 className="font-cinzel text-lg font-bold text-gold uppercase tracking-wider mb-2">
-                DRESS CODE
+                {copy.dressCode}
               </h3>
               <p className="font-serif text-2xl text-cream font-semibold">
-                {weddingData.event.dressCode}
+                {language === 'ar' ? 'أخضر زيتوني، بيج وبني' : weddingData.event.dressCode}
               </p>
-              <div className="flex items-center gap-3 mt-4" aria-label="Olive green, beige, and brown">
+              <div className="flex items-center gap-3 mt-4" aria-label={copy.dressCodeColors}>
                 <span className="w-7 h-7 rounded-full border border-cream/40 bg-[#596348]" />
                 <span className="w-7 h-7 rounded-full border border-cream/40 bg-[#E8DDCA]" />
                 <span className="w-7 h-7 rounded-full border border-cream/40 bg-[#795548]" />
@@ -145,10 +147,10 @@ export default function DetailsSection() {
 
           <div className="max-w-2xl mx-auto space-y-4">
             <h3 className="font-cinzel text-2xl sm:text-3xl font-bold text-cream">
-              FIND YOUR WAY TO LA ROSE
+              {copy.findVenue}
             </h3>
             <p className="font-sans text-sm text-beige/90 leading-relaxed">
-              Located at the renowned <span className="text-gold font-semibold">Tiba Rose Hotel</span> on El-Mosheer Tantawy Axis. Click below to launch direct turn-by-turn navigation in Google Maps.
+              {copy.directionsDescription}
             </p>
 
             <div className="pt-4 flex flex-wrap justify-center gap-4">
@@ -159,7 +161,7 @@ export default function DetailsSection() {
                 className="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-gradient-to-r from-gold via-gold-light to-gold text-dark font-cinzel text-sm font-bold tracking-[0.25em] uppercase hover:shadow-[0_0_40px_rgba(181,154,99,0.6)] transition-all duration-300 transform active:scale-95"
               >
                 <Navigation className="w-5 h-5 fill-dark" />
-                <span>GET DIRECTIONS</span>
+                <span>{copy.getDirections}</span>
                 <ExternalLink className="w-4 h-4 ml-1" />
               </a>
             </div>

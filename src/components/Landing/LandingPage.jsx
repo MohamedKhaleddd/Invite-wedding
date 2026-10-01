@@ -3,9 +3,10 @@ import gsap from 'gsap';
 import LivingBackground from '../Background/LivingBackground';
 import FloralDivider from '../UI/FloralDivider';
 import { weddingData } from '../../config/weddingData';
+import { translations } from '../../config/translations';
 import { Sparkles } from 'lucide-react';
 
-export default function LandingPage({ onEnterInvitation }) {
+export default function LandingPage({ onEnterInvitation, language, onToggleLanguage }) {
   const containerRef = useRef(null);
   const groomRef = useRef(null);
   const brideRef = useRef(null);
@@ -15,6 +16,7 @@ export default function LandingPage({ onEnterInvitation }) {
 
   const [hasMet, setHasMet] = useState(false);
   const [isLeaving, setIsLeaving] = useState(false);
+  const copy = translations[language];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -128,17 +130,26 @@ export default function LandingPage({ onEnterInvitation }) {
   return (
     <div
       ref={containerRef}
-      className={`relative min-h-screen flex flex-col items-center justify-between py-10 px-4 overflow-hidden select-none transition-all duration-700 ${
+      dir={language === 'ar' ? 'rtl' : 'ltr'}
+      className={`relative min-h-screen flex flex-col items-center justify-between py-10 px-4 overflow-hidden select-none transition-all duration-700 ${language === 'ar' ? 'font-arabic' : ''} ${
         isLeaving ? 'pointer-events-none' : ''
       }`}
     >
       {/* Living animated background */}
       <LivingBackground intensity="high" />
 
+      <button
+        onClick={onToggleLanguage}
+        aria-label={copy.languageLabel}
+        className="absolute top-5 right-4 z-30 rounded-full border border-gold/40 bg-dark-deeper/80 px-4 py-2 text-sm text-cream backdrop-blur-md transition-colors hover:border-gold hover:text-gold"
+      >
+        {copy.languageName}
+      </button>
+
       {/* Top Header Badge */}
       <div className="z-10 text-center pt-4">
         <span className="inline-block px-4 py-1.5 rounded-full border border-gold/30 bg-dark-deeper/60 text-gold text-xs font-cinzel tracking-[0.3em] uppercase backdrop-blur-md shadow-md">
-          Cinematic Wedding Experience
+          {copy.landingBadge}
         </span>
       </div>
 
@@ -146,7 +157,7 @@ export default function LandingPage({ onEnterInvitation }) {
       <div className="z-10 relative flex flex-col items-center justify-center w-full max-w-5xl my-auto py-4">
         
         {/* Illustrations Container */}
-        <div className="relative flex items-center justify-center gap-2 sm:gap-4 w-full max-w-3xl">
+        <div dir="ltr" className="relative flex items-center justify-center gap-2 sm:gap-4 w-full max-w-3xl">
           
           {/* Groom Illustration (Left) */}
           <div
@@ -175,7 +186,7 @@ export default function LandingPage({ onEnterInvitation }) {
             <span className="font-cinzel text-sm sm:text-2xl font-bold tracking-widest text-gold drop-shadow-md">
               T &amp; J
             </span>
-            <span className="hidden sm:block text-[9px] font-script text-beige tracking-wider">Forever</span>
+            <span className="hidden sm:block text-[9px] font-script text-beige tracking-wider">{copy.forever}</span>
           </div>
 
           {/* Bride Illustration (Right) */}
@@ -199,7 +210,7 @@ export default function LandingPage({ onEnterInvitation }) {
         </div>
 
         {/* Title Group: Names & Date */}
-        <div ref={titleGroupRef} className="text-center mt-6 sm:mt-10 px-4">
+        <div dir="ltr" ref={titleGroupRef} className="text-center mt-6 sm:mt-10 px-4">
           <h1 className="font-cinzel text-3xl sm:text-5xl md:text-6xl font-bold tracking-widest text-cream drop-shadow-lg">
             THARWAT <span className="font-script text-gold text-4xl sm:text-6xl font-normal mx-2">&amp;</span> JANA
           </h1>
@@ -207,7 +218,7 @@ export default function LandingPage({ onEnterInvitation }) {
           <FloralDivider className="my-2" />
 
           <p className="font-serif text-lg sm:text-2xl text-beige italic tracking-wider">
-            {weddingData.event.dateDisplay}
+            {copy.date}
           </p>
           <p className="text-xs sm:text-sm font-sans tracking-[0.25em] text-gold/90 uppercase mt-1">
             {weddingData.event.venue} — {weddingData.event.hotel}
@@ -221,7 +232,7 @@ export default function LandingPage({ onEnterInvitation }) {
             className="group relative px-8 sm:px-12 py-4 sm:py-5 rounded-full bg-gradient-to-r from-gold/20 via-gold/30 to-gold/20 border-2 border-gold text-cream font-cinzel text-sm sm:text-base font-semibold tracking-[0.3em] uppercase overflow-hidden shadow-[0_0_30px_rgba(181,154,99,0.3)] hover:shadow-[0_0_50px_rgba(181,154,99,0.7)] transition-all duration-500 active:scale-95"
           >
             <span className="relative z-10 flex items-center gap-3">
-              <span>ENTER INVITATION</span>
+              <span>{copy.enterInvitation}</span>
               <Sparkles className="w-4 h-4 text-gold group-hover:rotate-45 transition-transform duration-500" />
             </span>
             {/* Shimmer effect */}
@@ -234,7 +245,7 @@ export default function LandingPage({ onEnterInvitation }) {
       {/* Footer Tagline */}
       <div className="z-10 text-center pb-2">
         <p className="font-script text-xl text-gold/80">
-          "Together is our favorite place to be"
+          {copy.landingQuote}
         </p>
       </div>
     </div>

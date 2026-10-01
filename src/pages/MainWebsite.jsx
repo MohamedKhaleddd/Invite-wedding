@@ -6,8 +6,10 @@ import DetailsSection from '../components/Details/DetailsSection';
 import TimelineSection from '../components/Timeline/TimelineSection';
 import FloralDivider from '../components/UI/FloralDivider';
 import LivingBackground from '../components/Background/LivingBackground';
+import { translations } from '../config/translations';
 
-export default function MainWebsite() {
+export default function MainWebsite({ language, onToggleLanguage }) {
+  const copy = translations[language];
   return (
     <div className="relative min-h-screen bg-dark-deeper text-cream selection:bg-gold selection:text-dark">
       
@@ -15,14 +17,14 @@ export default function MainWebsite() {
       <LivingBackground intensity="high" />
 
       {/* Header Navigation */}
-      <Navbar />
+      <Navbar language={language} onToggleLanguage={onToggleLanguage} />
 
       {/* Main Page Sections */}
       <main className="relative z-10">
-        <HeroSection />
-        <StorySection />
-        <DetailsSection />
-        <TimelineSection />
+        <HeroSection language={language} />
+        <StorySection language={language} />
+        <DetailsSection language={language} />
+        <TimelineSection language={language} />
       </main>
 
       {/* Footer Section */}
@@ -37,17 +39,17 @@ export default function MainWebsite() {
           </h3>
 
           <p className="font-serif text-lg text-beige italic max-w-md mx-auto">
-            "We can't wait to share the beginning of our forever with you."
+            {copy.footerQuote}
           </p>
 
           <FloralDivider className="py-2" />
 
           <p className="font-sans text-xs tracking-[0.25em] text-gold/70 uppercase">
-            Friday, November 13, 2026 • La Rose @ Tiba Rose Hotel
+            {copy.footerDate}
           </p>
 
           <div className="pt-6 text-[11px] font-sans text-beige/40">
-            Designed with love for Tharwat &amp; Jana's Wedding
+            {copy.footerCredit}
           </div>
         </div>
       </footer>

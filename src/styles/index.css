@@ -24,6 +24,7 @@
   --font-cinzel: 'Cinzel', serif;
   --font-sans: 'Montserrat', sans-serif;
   --font-script: 'Alex Brush', cursive;
+  --font-arabic: 'Noto Sans Arabic', sans-serif;
 }
 
 html {
@@ -64,6 +65,18 @@ body {
 
 .font-script {
   font-family: 'Alex Brush', cursive;
+}
+
+.font-arabic {
+  font-family: 'Noto Sans Arabic', sans-serif;
+  letter-spacing: 0;
+}
+
+.font-arabic .font-cinzel,
+.font-arabic .font-serif,
+.font-arabic .font-sans {
+  font-family: 'Noto Sans Arabic', sans-serif;
+  letter-spacing: 0;
 }
 
 /* Gold Gradient Text */

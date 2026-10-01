@@ -4,14 +4,16 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import FloralDivider from '../UI/FloralDivider';
 import Countdown from '../UI/Countdown';
 import { weddingData } from '../../config/weddingData';
+import { translations } from '../../config/translations';
 import { Calendar, Clock, MapPin, ChevronDown, Sparkles } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function HeroSection() {
+export default function HeroSection({ language }) {
   const heroRef = useRef(null);
   const contentRef = useRef(null);
   const bgImgRef = useRef(null);
+  const copy = translations[language];
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -42,7 +44,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section ref={heroRef} id="home" className="relative min-h-screen flex items-center justify-center pt-24 pb-16 px-4 overflow-hidden">
+    <section dir={language === 'ar' ? 'rtl' : 'ltr'} ref={heroRef} id="home" className={`relative min-h-screen flex items-center justify-center pt-24 pb-16 px-4 overflow-hidden ${language === 'ar' ? 'font-arabic' : ''}`}>
       
       {/* Background Image with Cinematic Luxury Grading */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -66,7 +68,7 @@ export default function HeroSection() {
         {/* Top Tagline Badge */}
         <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-dark-deeper/80 border border-gold/40 text-gold text-xs font-cinzel tracking-[0.3em] uppercase backdrop-blur-md mb-6 shadow-2xl animate-pulse-glow">
           <Sparkles className="w-3.5 h-3.5 text-gold" />
-          <span>We Are Getting Married</span>
+          <span>{copy.heroTagline}</span>
         </div>
 
         {/* Main Names */}
@@ -80,12 +82,12 @@ export default function HeroSection() {
         <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 my-4 text-beige font-serif text-lg sm:text-2xl">
           <div className="flex items-center gap-2">
             <Calendar className="w-5 h-5 text-gold" />
-            <span>{weddingData.event.dateDisplay}</span>
+            <span>{copy.date}</span>
           </div>
           <div className="hidden sm:block text-gold/40">•</div>
           <div className="flex items-center gap-2">
             <Clock className="w-5 h-5 text-gold" />
-            <span>{weddingData.event.timeDisplay}</span>
+            <span>{copy.time}</span>
           </div>
         </div>
 
@@ -97,8 +99,8 @@ export default function HeroSection() {
 
         {/* Live Countdown Timer */}
         <div className="mt-8">
-          <p className="text-xs font-cinzel tracking-[0.3em] text-gold/80 uppercase mb-2">Countdown To The Big Day</p>
-          <Countdown />
+          <p className="text-xs font-cinzel tracking-[0.3em] text-gold/80 uppercase mb-2">{copy.countdownTitle}</p>
+          <Countdown language={language} />
         </div>
 
         {/* Direct Navigation Quick Buttons */}
@@ -107,7 +109,7 @@ export default function HeroSection() {
             href="#details"
             className="px-8 py-3.5 rounded-full bg-gold text-dark font-cinzel text-xs font-bold tracking-[0.25em] uppercase hover:bg-gold-light transition-all duration-300 shadow-xl"
           >
-            Event Details
+            {copy.eventDetails}
           </a>
           <a
             href={weddingData.event.googleMapsUrl}
@@ -115,7 +117,7 @@ export default function HeroSection() {
             rel="noopener noreferrer"
             className="px-8 py-3.5 rounded-full bg-dark-deeper/80 border border-gold/50 text-beige font-cinzel text-xs font-semibold tracking-[0.25em] uppercase hover:border-gold hover:text-gold transition-all duration-300 backdrop-blur-md"
           >
-            Get Directions
+            {copy.getDirections}
           </a>
         </div>
 
@@ -124,10 +126,10 @@ export default function HeroSection() {
       {/* Down Scroll Indicator */}
       <a
         href="#story"
-        aria-label="Scroll to story"
+        aria-label={copy.scroll}
         className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center text-gold/70 hover:text-gold transition-colors animate-bounce"
       >
-        <span className="text-[10px] font-cinzel tracking-widest uppercase mb-1">Scroll</span>
+        <span className="text-[10px] font-cinzel tracking-widest uppercase mb-1">{copy.scroll}</span>
         <ChevronDown className="w-5 h-5" />
       </a>
 

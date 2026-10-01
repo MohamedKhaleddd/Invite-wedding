@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { weddingData } from '../../config/weddingData';
 
-export default function Countdown() {
+export default function Countdown({ language }) {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
@@ -30,20 +30,17 @@ export default function Countdown() {
     return () => clearInterval(interval);
   }, []);
 
-  const items = [
-    { label: 'DAYS', value: timeLeft.days },
-    { label: 'HOURS', value: timeLeft.hours },
-    { label: 'MINUTES', value: timeLeft.minutes },
-    { label: 'SECONDS', value: timeLeft.seconds },
-  ];
+  const labels = language === 'ar' ? ['يوم', 'ساعة', 'دقيقة', 'ثانية'] : ['DAYS', 'HOURS', 'MINUTES', 'SECONDS'];
+  const formatter = new Intl.NumberFormat(language === 'ar' ? 'ar-EG' : 'en-US', { minimumIntegerDigits: 2, useGrouping: false });
+  const items = [timeLeft.days, timeLeft.hours, timeLeft.minutes, timeLeft.seconds].map((value, index) => ({ label: labels[index], value }));
 
   return (
-    <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 my-6">
+    <div dir="ltr" className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 my-6">
       {items.map((item, index) => (
         <div key={item.label} className="flex items-center">
           <div className="flex flex-col items-center justify-center min-w-[70px] sm:min-w-[95px] py-3 sm:py-4 px-3 rounded-lg bg-dark-deeper/70 border border-gold/30 backdrop-blur-md shadow-xl">
             <span className="font-cinzel text-2xl sm:text-4xl font-bold text-gold drop-shadow-sm">
-              {String(item.value).padStart(2, '0')}
+              {formatter.format(item.value)}
             </span>
             <span className="text-[9px] sm:text-[11px] font-sans tracking-[0.25em] text-beige uppercase mt-1">
               {item.label}
