@@ -18,9 +18,9 @@ export default function LandingPage({ onEnterInvitation }) {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Initial setup: groom on left (-120px on mobile, -220px desktop), bride on right (+120px / +220px)
+      // Keep the opening motion within the viewport on narrow screens.
       const isMobile = window.innerWidth < 768;
-      const startDistanceX = isMobile ? 80 : 180;
+      const startDistanceX = isMobile ? 18 : 55;
 
       gsap.set(groomRef.current, { x: -startDistanceX, opacity: 0, scale: 0.95 });
       gsap.set(brideRef.current, { x: startDistanceX, opacity: 0, scale: 0.95 });
@@ -44,13 +44,13 @@ export default function LandingPage({ onEnterInvitation }) {
       })
       // 2. Convergence animation: Groom moves right, Bride moves left towards center
       .to(groomRef.current, {
-        x: isMobile ? -15 : -35,
+        x: isMobile ? -5 : -18,
         scale: 1,
         duration: 2.5,
         ease: "power2.inOut"
       }, "+=0.3")
       .to(brideRef.current, {
-        x: isMobile ? 15 : 35,
+        x: isMobile ? 5 : 18,
         scale: 1,
         duration: 2.5,
         ease: "power2.inOut"
@@ -146,12 +146,12 @@ export default function LandingPage({ onEnterInvitation }) {
       <div className="z-10 relative flex flex-col items-center justify-center w-full max-w-5xl my-auto py-4">
         
         {/* Illustrations Container */}
-        <div className="relative flex items-center justify-center w-full min-h-[340px] sm:min-h-[420px] max-w-3xl">
+        <div className="relative flex items-center justify-center gap-2 sm:gap-4 w-full max-w-3xl">
           
           {/* Groom Illustration (Left) */}
           <div
             ref={groomRef}
-            className="absolute left-1/2 -ml-[230px] sm:-ml-[320px] w-[170px] sm:w-[260px] md:w-[300px] rounded-2xl overflow-hidden shadow-2xl border border-gold/30 bg-dark/60 p-2 sm:p-3 transform transition-shadow duration-500 hover:shadow-gold/20"
+            className="relative w-[42vw] max-w-[260px] rounded-2xl overflow-hidden shadow-2xl border border-gold/30 bg-dark/60 p-1.5 sm:p-3 transform transition-shadow duration-500 hover:shadow-gold/20"
           >
             <div className="relative aspect-[3/4] rounded-xl overflow-hidden">
               <img
@@ -169,19 +169,19 @@ export default function LandingPage({ onEnterInvitation }) {
           {/* Golden Center Meeting Monogram Ornament */}
           <div
             ref={ornamentRef}
-            className="z-20 flex flex-col items-center justify-center w-20 h-20 sm:w-28 sm:h-28 rounded-full bg-dark-deeper/90 border-2 border-gold text-gold shadow-[0_0_40px_rgba(181,154,99,0.5)] backdrop-blur-xl"
+            className="absolute z-20 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center w-14 h-14 sm:w-28 sm:h-28 rounded-full bg-dark-deeper/90 border-2 border-gold text-gold shadow-[0_0_40px_rgba(181,154,99,0.5)] backdrop-blur-xl"
           >
-            <Sparkles className="w-5 h-5 text-gold animate-spin-slow mb-0.5 opacity-80" />
-            <span className="font-cinzel text-lg sm:text-2xl font-bold tracking-widest text-gold drop-shadow-md">
+            <Sparkles className="hidden sm:block w-5 h-5 text-gold animate-spin-slow mb-0.5 opacity-80" />
+            <span className="font-cinzel text-sm sm:text-2xl font-bold tracking-widest text-gold drop-shadow-md">
               T &amp; J
             </span>
-            <span className="text-[9px] font-script text-beige tracking-wider">Forever</span>
+            <span className="hidden sm:block text-[9px] font-script text-beige tracking-wider">Forever</span>
           </div>
 
           {/* Bride Illustration (Right) */}
           <div
             ref={brideRef}
-            className="absolute right-1/2 -mr-[230px] sm:-mr-[320px] w-[170px] sm:w-[260px] md:w-[300px] rounded-2xl overflow-hidden shadow-2xl border border-gold/30 bg-dark/60 p-2 sm:p-3 transform transition-shadow duration-500 hover:shadow-gold/20"
+            className="relative w-[42vw] max-w-[260px] rounded-2xl overflow-hidden shadow-2xl border border-gold/30 bg-dark/60 p-1.5 sm:p-3 transform transition-shadow duration-500 hover:shadow-gold/20"
           >
             <div className="relative aspect-[3/4] rounded-xl overflow-hidden">
               <img

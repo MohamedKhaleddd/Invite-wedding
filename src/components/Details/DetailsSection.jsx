@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import GoldBorder from '../UI/GoldBorder';
 import FloralDivider from '../UI/FloralDivider';
 import { weddingData } from '../../config/weddingData';
-import { Calendar, MapPin, Navigation, Compass, ExternalLink } from 'lucide-react';
+import { Calendar, MapPin, Navigation, Compass, ExternalLink, Shirt } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -76,7 +76,7 @@ export default function DetailsSection() {
         </div>
 
         {/* Main Details Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-5xl mx-auto">
           
           {/* Card 1: Date & Time */}
           <div className="detail-card">
@@ -87,7 +87,7 @@ export default function DetailsSection() {
               <h3 className="font-cinzel text-lg font-bold text-gold uppercase tracking-wider mb-2">
                 WHEN
               </h3>
-              <p className="font-serif text-2xl sm:text-3xl text-cream font-semibold">
+              <p className="font-serif text-2xl text-cream font-semibold">
                 Friday, Nov 13, 2026
               </p>
               <p className="text-sm text-beige/80 mt-2 font-light">
@@ -105,7 +105,7 @@ export default function DetailsSection() {
               <h3 className="font-cinzel text-lg font-bold text-gold uppercase tracking-wider mb-2">
                 WHERE
               </h3>
-              <p className="font-serif text-2xl sm:text-3xl text-cream font-semibold">
+              <p className="font-serif text-2xl text-cream font-semibold">
                 {weddingData.event.venue}
               </p>
               <p className="text-base font-sans text-beige/90 mt-1 font-medium">
@@ -114,6 +114,26 @@ export default function DetailsSection() {
               <p className="text-xs text-beige/60 mt-1">
                 El-Mosheer Tantawy Axis, Cairo
               </p>
+            </GoldBorder>
+          </div>
+
+          {/* Card 3: Dress Code */}
+          <div className="detail-card">
+            <GoldBorder className="text-center flex flex-col items-center justify-center p-8 sm:p-10 border-gold/50 bg-dark-deeper/70 hover:border-gold transition-colors backdrop-blur-md">
+              <div className="w-14 h-14 rounded-full bg-gold/10 border border-gold/40 flex items-center justify-center text-gold mb-4">
+                <Shirt className="w-7 h-7" />
+              </div>
+              <h3 className="font-cinzel text-lg font-bold text-gold uppercase tracking-wider mb-2">
+                DRESS CODE
+              </h3>
+              <p className="font-serif text-2xl text-cream font-semibold">
+                {weddingData.event.dressCode}
+              </p>
+              <div className="flex items-center gap-3 mt-4" aria-label="Olive green, beige, and brown">
+                <span className="w-7 h-7 rounded-full border border-cream/40 bg-[#596348]" />
+                <span className="w-7 h-7 rounded-full border border-cream/40 bg-[#E8DDCA]" />
+                <span className="w-7 h-7 rounded-full border border-cream/40 bg-[#795548]" />
+              </div>
             </GoldBorder>
           </div>
 

@@ -9,6 +9,7 @@ export const weddingData = {
   event: {
     dateDisplay: "Friday, November 13, 2026",
     timeDisplay: "8:00 PM",
+    dressCode: "Olive green, beige & brown",
     isoDate: "2026-11-13T20:00:00+02:00", // Nov 13, 2026 at 8:00 PM Cairo Time
     venue: "La Rose",
     hotel: "Tiba Rose Hotel",
